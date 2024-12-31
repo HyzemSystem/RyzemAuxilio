@@ -1,0 +1,34 @@
+#NoEnv
+SendMode Input
+SetWorkingDir %A_ScriptDir%
+#Persistent
+
+; Atajos para ajustar sensibilidad en Free Fire
+; Aumentar sensibilidad
+F1::
+MouseSpeed := MouseSpeed + 1
+ToolTip, Sensibilidad: %MouseSpeed%
+Sleep, 500
+ToolTip
+return
+
+; Reducir sensibilidad
+F2::
+MouseSpeed := MouseSpeed - 1
+ToolTip, Sensibilidad: %MouseSpeed%
+Sleep, 500
+ToolTip
+return
+
+; Resetear sensibilidad
+F3::
+MouseSpeed := 10 ; Valor predeterminado de sensibilidad
+ToolTip, Sensibilidad reseteada: %MouseSpeed%
+Sleep, 500
+ToolTip
+return
+
+; Aplicar la sensibilidad al mover el ratón
+~LButton::
+SetMouseDelay, %MouseSpeed%
+return

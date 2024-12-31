@@ -1,0 +1,29 @@
+#!/bin/bash
+echo "NoRecoil Script Iniciado"
+
+# Lista de armas y configuraciones de retroceso
+declare -A armas
+armas=( ["AK47"]="0 5 0.04" ["M4A1"]="0 3 0.03" ["MP5"]="0 2 0.02" )
+
+# Mostrar las opciones disponibles
+echo "Selecciona el arma:"
+select arma in "${!armas[@]}"; do
+    if [[ -n "$arma" ]]; then
+        config=(${armas[$arma]})  # Extraer configuración del arma seleccionada
+        x=${config[0]}           # Movimiento en X
+        y=${config[1]}           # Movimiento en Y
+        delay=${config[2]}       # Pausa entre movimientos
+        break
+    else
+        echo "Opción no válida, intenta nuevamente."
+    fi
+done
+
+# Ejecutar el script para compensar el retroceso
+echo "Usando $arma con configuración X: $x, Y: $y, Delay: $delay"
+for i in {1..20}; do
+    xdotool mousemove_relative -- $x $y
+    sleep $delay
+done
+
+echo "NoRecoil Script plus 
